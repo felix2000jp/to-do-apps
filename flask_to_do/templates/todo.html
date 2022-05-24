@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}ToDo List{% endblock title %}
+
+{% block content %}
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Status</th>
+            <th scope="col">Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for object in object_list %}
+        <tr>
+            <td>
+                <h4>{{object.name}}</h4>
+            </td>
+            <td>
+                {% if object.status == False %}
+                <h4 class="text-danger">Task Not Finished</h4>
+                {% else %}
+                <h4 class="text-success">Task Finished</h4>
+                {% endif %}
+            </td>
+            <td class="d-flex gap-2">
+                <a href="/delete/{{object.id}}" type='submit' class="btn btn-secondary">Delete</a>
+                    {% if object.status == False %}
+                    <a href="/update/{{object.id}}" type='submit' class="btn btn-success">Finished</a>
+                    {% else %}
+                    <a href="/update/{{object.id}}" type='submit' class="btn btn-danger">Not Finished</a>
+                    {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="mt-5 text-center">
+    <form class="d-flex gap-2 justify-content-center" action="" method="post">
+        <input type="text" name='add' class='form-control w-50' placeholder='Name'>
+        <button type='submit' class="btn btn-dark">Add To Do</button>
+    </form>
+</div>
+{% endblock content %}
