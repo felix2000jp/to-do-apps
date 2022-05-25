@@ -1,0 +1,51 @@
+<%- include('base') %>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-5">ToDo App</h1>
+    </div>
+    <div class="container">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Status</th>
+                <th scope="col">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(var i=0; i < objects.length; i++) { %> 
+            <tr>
+                <td>
+                    <h4><%= objects[i].name %></h4>
+                </td>
+                <td>
+                    <% if(!objects[i].status){ %>
+                    <h4 class="text-danger">Task Not Finished</h4>
+                    <% } else{ %>  
+                    <h4 class="text-success">Task Finished</h4>
+                    <% } %>
+                </td>
+                <td class="d-flex gap-2">
+                    <a href="/delete/<%= objects[i].id %>" type='submit' class="btn btn-secondary">Delete</a>
+                    <% if(!objects[i].status){ %>
+                    <a href="/update/<%= objects[i].id %>" type='submit' class="btn btn-success">Finished</a>
+                    <% } else{ %>  
+                    <a href="/update/<%= objects[i].id %>" type='submit' class="btn btn-danger">Not Finished</a>
+                    <% } %>
+                </td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+    <div class="mt-5 text-center">
+        <form class="d-flex gap-2 justify-content-center" action="/" method="post">
+            <input type="text" name="name" class='form-control w-50' placeholder='Name' required>
+            <button type='submit'class="btn btn-dark">Add To Do</button>
+        </form>
+    </div>
+</div>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</body>
+</html>
